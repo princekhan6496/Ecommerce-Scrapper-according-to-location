@@ -144,7 +144,6 @@ try:
             product_name = card.find_element(By.CSS_SELECTOR, LOCATORS["product_name_css"]).text.strip()
             
             # 2. Selling Price
-            # Find the price container, then the first child (which is the selling price)
             price_container = card.find_element(By.CLASS_NAME, LOCATORS["price_container_class"])
             selling_price_element = price_container.find_elements(By.TAG_NAME, 'div')[0] 
             selling_price = selling_price_element.text.strip().replace('₹', '').replace(',', '')
@@ -152,7 +151,6 @@ try:
             # 3. Discount Tag 
             discount_tag = ""
             try:
-                # Use the reliable data-testid
                 discount_element = card.find_element(By.CSS_SELECTOR, f'div[data-testid="{LOCATORS["discount_tag_testid"]}"]')
                 discount_tag = discount_element.text.strip()
             except:
@@ -171,7 +169,6 @@ try:
             })
             
         except Exception as card_e:
-            # This should only skip a card if its HTML is incomplete or drastically different
             print(f"    - Error extracting data for product {rank}. Skipping.")
             continue
 
